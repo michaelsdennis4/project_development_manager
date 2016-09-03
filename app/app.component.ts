@@ -2,7 +2,8 @@
  * Created by Michael on 8/28/16.
  */
 
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+
 @Component({
     selector: 'project-app',
     template: `

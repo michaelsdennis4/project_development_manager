@@ -1,5 +1,5 @@
 /**
- * Created by Michael on 8/28/16.
+ * Created by Michael on 6/15/16.
  */
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11,24 +11,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var app_routing_1 = require('./app.routing');
-var app_component_1 = require('./app.component');
-var dashboard_component_1 = require("./dashboard.component");
-var AppModule = (function () {
-    function AppModule() {
+var core_1 = require('angular2/core');
+var TaskListComponent = (function () {
+    function TaskListComponent() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, app_routing_1.routing],
-            declarations: [app_component_1.AppComponent, dashboard_component_1.DashboardComponent],
-            providers: [app_routing_1.appRoutingProviders],
-            bootstrap: [app_component_1.AppComponent]
+    TaskListComponent = __decorate([
+        core_1.Component({
+            selector: 'task-list',
+            template: "\n        <link rel=\"stylesheet\" href=\"app/stylesheets/dashboard.css\">\n        <div class=\"container task-list\" id=\"task-list\">\n\t\t    Tasks\n\t\t\t<div class=\"container task-list-item\">\n\t\t\t    Sample Task\n\t\t\t</div>\n\t\t</div>"
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], TaskListComponent);
+    return TaskListComponent;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.TaskListComponent = TaskListComponent;
+//# sourceMappingURL=task_list.component.js.map

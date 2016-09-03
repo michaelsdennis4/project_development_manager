@@ -1,5 +1,5 @@
 /**
- * Created by Michael on 9/3/16.
+ * Created by Michael on 6/15/16.
  */
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -11,18 +11,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var DashboardComponent = (function () {
-    function DashboardComponent() {
+var core_1 = require('angular2/core');
+var UserStoriesComponent = (function () {
+    function UserStoriesComponent() {
     }
-    DashboardComponent = __decorate([
+    UserStoriesComponent = __decorate([
         core_1.Component({
-            selector: 'dashboard',
-            template: "<h1>This is the dashboard component</h1>"
+            selector: 'user-stories',
+            template: "\n        <link rel=\"stylesheet\" href=\"app/stylesheets/dashboard.css\">\n        <div class=\"container user-stories\" id=\"user-stories\">\n\t\t\tUser Stories\n\t\t\t<div class=\"container user-story-item\">\n\t\t\t\tSample User Story\n\t\t\t</div>\n\t\t</div>"
         }), 
         __metadata('design:paramtypes', [])
-    ], DashboardComponent);
-    return DashboardComponent;
+    ], UserStoriesComponent);
+    return UserStoriesComponent;
 }());
-exports.DashboardComponent = DashboardComponent;
-//# sourceMappingURL=app.dashboard.js.map
+exports.UserStoriesComponent = UserStoriesComponent;
+//# sourceMappingURL=user_stories.component.js.map
