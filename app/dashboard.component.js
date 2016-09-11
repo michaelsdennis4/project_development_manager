@@ -12,6 +12,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+// import {ProjectSelectorComponent} from './project_selector.component';
+// import {WireframesComponent} from './wireframes.component';
+// import {UserStoriesComponent} from './user_stories.component';
+// import {BannerComponent} from './banner.component';
+// import {TaskListComponent} from './task_list.component';
 var DashboardComponent = (function () {
     function DashboardComponent() {
     }

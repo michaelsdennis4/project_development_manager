@@ -3,13 +3,13 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-// import {Router, ROUTER_DIRECTIVES} from '@angular/router';
+import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 
-import {ProjectSelectorComponent} from './project_selector.component';
-import {WireframesComponent} from './wireframes.component';
-import {UserStoriesComponent} from './user_stories.component';
-import {BannerComponent} from './banner.component';
-import {TaskListComponent} from './task_list.component';
+// import {ProjectSelectorComponent} from './project_selector.component';
+// import {WireframesComponent} from './wireframes.component';
+// import {UserStoriesComponent} from './user_stories.component';
+// import {BannerComponent} from './banner.component';
+// import {TaskListComponent} from './task_list.component';
 
 @Component({
     selector: 'dashboard',

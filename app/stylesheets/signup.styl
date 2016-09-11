@@ -1,0 +1,58 @@
+.top-link
+  text-align center
+
+.title
+  width 100%
+  font-size 36px
+  margin-top 120px
+  text-align center
+
+.profile-caption
+  width 100%
+  font-size 24px
+  margin-top 60px
+  text-align center
+
+.profile-credentials
+  width 50%
+  margin-top 40px
+  margin-left 25%
+  margin-right auto
+  margin-bottom 30px
+  font-size 20px
+  padding 5px
+  text-align center
+
+  form.profile-form
+    margin-top 20px
+    margin-bottom 20px
+
+    label
+      font-size 14px
+
+    input[type=text], input[type=password]
+      width 60%
+      height 30px
+
+    input.profile-submit
+      min-width 80px
+      padding-left 10px
+      padding-right 10px
+      height 30px
+      font-size 14px
+
+.submit-message
+  color red
+
+//transition css
+:host(.signupContainer)
+  display inline-block
+  width 100%
+  -webkit-transition all ease-in 0.5s
+  transition all ease-in 0.5s
+
+:host(.signupContainer.ng-enter)
+  transform translateY(100%)
+
+:host(.signupContainer.ng-enter-active)
+  transform translateY(0)

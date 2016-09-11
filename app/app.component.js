@@ -12,13 +12,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+require('./rxjs-operators');
 var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent = __decorate([
         core_1.Component({
             selector: 'project-app',
-            template: "\n        <h1>My First Angular 2 App</h1>\n        <nav>\n            <a routerLink=\"/dashboard\" routerLinkActive=\"active\">Dashboard</a>\n        </nav>\n        <router-outlet></router-outlet>"
+            template: '<router-outlet></router-outlet>'
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

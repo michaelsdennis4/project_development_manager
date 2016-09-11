@@ -42,10 +42,10 @@ var BannerComponent = (function () {
             directives: [router_1.ROUTER_DIRECTIVES],
             providers: [login_service_1.LoginService, http_1.HTTP_PROVIDERS]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof login_service_1.LoginService !== 'undefined' && login_service_1.LoginService) === 'function' && _a) || Object, (typeof (_b = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [login_service_1.LoginService, (typeof (_a = typeof router_1.Router !== 'undefined' && router_1.Router) === 'function' && _a) || Object])
     ], BannerComponent);
     return BannerComponent;
-    var _a, _b;
+    var _a;
 }());
 exports.BannerComponent = BannerComponent;
 //# sourceMappingURL=banner.component.js.map
