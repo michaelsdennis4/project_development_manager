@@ -28,10 +28,12 @@ var LoginService = (function () {
             .map(function (data) { return data.json(); });
     };
     LoginService.prototype.isLoggedIn = function () {
-        return this._http.get('/logged').map(function (data) { return data.json(); });
+        return this._http.get('/logged')
+            .map(function (data) { return data.json(); });
     };
     LoginService.prototype.logout = function () {
-        return this._http.get('/logout').map(function (data) { return data.json(); });
+        return this._http.get('/logout')
+            .map(function (data) { return data.json(); });
     };
     LoginService = __decorate([
         core_1.Injectable(), 

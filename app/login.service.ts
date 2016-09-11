@@ -3,12 +3,8 @@
  */
 
 import {Injectable} from '@angular/core';
-import {Headers, Http, Response, RequestOptions} from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
-
-interface IMessage {
-    message: string;
-}
 
 @Injectable()
 export class LoginService {
@@ -30,24 +26,14 @@ export class LoginService {
 
     }
 
-    isLoggedIn() {
-        return this._http.get('/logged').map(data => data.json());
+    isLoggedIn(): Observable<any> {
+        return this._http.get('/logged')
+            .map(data => data.json());
     }
     
-    logout() {
-        return this._http.get('/logout').map(data => data.json());
+    logout(): Observable<any> {
+        return this._http.get('/logout')
+            .map(data => data.json());
     }
-
-    // private extractData(res: Response) {
-    //     let body = res.json();
-    //     return body.data || { };
-    // }
-    //
-    // private handleError (error: any) {
-    //     let errMsg = (error.message) ? error.message :
-    //         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    //     console.error(errMsg); // log to console instead
-    //     return Observable.throw(errMsg);
-    // }
 
 }

@@ -29,7 +29,7 @@ import {LoginService} from "./login.service";
                 <span class="submit-message" id="login-message">{{message}}</span>
             </div>
             <div class="container signup-link" id="signup">
-                <a [routerLink]="['SignUp']">Sign Up</a>
+                <a routerLink="/signup" routerLinkActive="active">Sign Up</a>
             </div>
 	    </div>`,
     host: {'class' : 'ng-animate loginContainer'},
