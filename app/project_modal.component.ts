@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
 		    <div class="modalDialogWindow">
 			    <a href="" title="Close" class="close" (click)="onClose($event)">X</a>
 			    <h1>Add a New Project</h1>
-			    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+			    <form *ngIf="active" #f="ngForm" (ngSubmit)="onSubmit(f.value)">
 			        <label for="title">Project Title:</label><br>
 			        <input type="text" name="title" [ngModel]="title"/><br>
 			        <label for="repo">Git Repo</label><br>
@@ -35,21 +35,28 @@ import {Router} from "@angular/router";
     inputs: ['isModalShown:show-modal'],
     outputs: ['projectAdded:added']
 })
-export class ProjectModalComponent {
+export class ProjectModalComponent implements OnInit {
 
     public isModalShown: IModalShown;
     public projectAdded = new EventEmitter();
+    public active: boolean = true;
     private message: string = "";
 
     constructor(private _projectService: ProjectService, private _router: Router) {};
 
-    onSubmit(form) {
+    ngOnInit(): void {
+        this.active = true;
+    }
+
+    private onSubmit(form): void {
         this._projectService.addNewProject(form).subscribe(result => {
             if (result.message === 'ok') {
                 this.isModalShown.show = false;
+                this.refreshForm();
                 this.projectAdded.emit({value: result.message});
             } else if (result.message == 'login') {
                 this.isModalShown.show = false;
+                this.refreshForm();
                 this._router.navigateByUrl('/login');
             } else {
                 console.log(result.message);
@@ -58,8 +65,14 @@ export class ProjectModalComponent {
         });
     }
 
-    onClose($event) {
+    private onClose($event): void {
         $event.preventDefault();
         this.isModalShown.show = false;
+        this.refreshForm();
+    }
+
+    private refreshForm(): void {
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
     }
 }

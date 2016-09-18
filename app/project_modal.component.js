@@ -20,18 +20,24 @@ var ProjectModalComponent = (function () {
         this._projectService = _projectService;
         this._router = _router;
         this.projectAdded = new core_1.EventEmitter();
+        this.active = true;
         this.message = "";
     }
     ;
+    ProjectModalComponent.prototype.ngOnInit = function () {
+        this.active = true;
+    };
     ProjectModalComponent.prototype.onSubmit = function (form) {
         var _this = this;
         this._projectService.addNewProject(form).subscribe(function (result) {
             if (result.message === 'ok') {
                 _this.isModalShown.show = false;
+                _this.refreshForm();
                 _this.projectAdded.emit({ value: result.message });
             }
             else if (result.message == 'login') {
                 _this.isModalShown.show = false;
+                _this.refreshForm();
                 _this._router.navigateByUrl('/login');
             }
             else {
@@ -43,11 +49,17 @@ var ProjectModalComponent = (function () {
     ProjectModalComponent.prototype.onClose = function ($event) {
         $event.preventDefault();
         this.isModalShown.show = false;
+        this.refreshForm();
+    };
+    ProjectModalComponent.prototype.refreshForm = function () {
+        var _this = this;
+        this.active = false;
+        setTimeout(function () { return _this.active = true; }, 0);
     };
     ProjectModalComponent = __decorate([
         core_1.Component({
             selector: 'project-modal',
-            template: "\n        <div class=\"modalDialog\" [modal-show]=\"isModalShown\">\n\t\t    <div class=\"modalDialogWindow\">\n\t\t\t    <a href=\"\" title=\"Close\" class=\"close\" (click)=\"onClose($event)\">X</a>\n\t\t\t    <h1>Add a New Project</h1>\n\t\t\t    <form #f=\"ngForm\" (ngSubmit)=\"onSubmit(f.value)\">\n\t\t\t        <label for=\"title\">Project Title:</label><br>\n\t\t\t        <input type=\"text\" name=\"title\" [ngModel]=\"title\"/><br>\n\t\t\t        <label for=\"repo\">Git Repo</label><br>\n\t\t\t        <input type=\"text\" name=\"repo\" [ngModel]=\"repo\"/><br>\n\t\t\t        <label for=\"url\">URL</label><br>\n\t\t\t        <input type=\"text\" name=\"url\" [ngModel]=\"url\"/><br>\n\t\t\t        <label for=\"description\">Description:</label><br>\n\t\t\t        <textarea id=\"description\" name=\"description\" [ngModel]=\"description\"></textarea><br>\n\t\t\t        <br>\n\t\t\t        <input type=\"submit\" value=\"Create New Project\"/>\n                </form>\n\t\t    </div>\n\t\t</div>",
+            template: "\n        <div class=\"modalDialog\" [modal-show]=\"isModalShown\">\n\t\t    <div class=\"modalDialogWindow\">\n\t\t\t    <a href=\"\" title=\"Close\" class=\"close\" (click)=\"onClose($event)\">X</a>\n\t\t\t    <h1>Add a New Project</h1>\n\t\t\t    <form *ngIf=\"active\" #f=\"ngForm\" (ngSubmit)=\"onSubmit(f.value)\">\n\t\t\t        <label for=\"title\">Project Title:</label><br>\n\t\t\t        <input type=\"text\" name=\"title\" [ngModel]=\"title\"/><br>\n\t\t\t        <label for=\"repo\">Git Repo</label><br>\n\t\t\t        <input type=\"text\" name=\"repo\" [ngModel]=\"repo\"/><br>\n\t\t\t        <label for=\"url\">URL</label><br>\n\t\t\t        <input type=\"text\" name=\"url\" [ngModel]=\"url\"/><br>\n\t\t\t        <label for=\"description\">Description:</label><br>\n\t\t\t        <textarea id=\"description\" name=\"description\" [ngModel]=\"description\"></textarea><br>\n\t\t\t        <br>\n\t\t\t        <input type=\"submit\" value=\"Create New Project\"/>\n                </form>\n\t\t    </div>\n\t\t</div>",
             directives: [modal_directive_1.ModalDirective],
             providers: [project_service_1.ProjectService],
             styleUrls: ['app/stylesheets/modal.css'],
