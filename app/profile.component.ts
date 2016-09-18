@@ -2,31 +2,30 @@
  * Created by Michael on 6/12/16.
  */
 
-import {Component} from 'angular2/core';
-import {Router, ROUTER_DIRECTIVES} from "angular2/router";
+import {Component} from '@angular/core';
+import {Router, ROUTER_DIRECTIVES} from "@angular/router";
 import {ProfileService} from "./profile.service";
-import {HTTP_PROVIDERS} from "angular2/http";
 
 @Component({
     selector: 'profile',
     template: `
-        <div class="top-link"><a [routerLink]="['Dashboard']">Dashboard</a></div>
+        <div class="top-link"><a [routerLink]="['/dashboard']">Dashboard</a></div>
 	    <div class="container profile-caption" id="profile-caption">
 	       	Edit My Profile
 	    </div>
 	    <div class="container profile-credentials" id="profile-credentials">
-	    	<form #f1="ngForm" (ngSubmit)="onUpdateProfile(f1.form)" class="profile-form">
+	    	<form #f1="ngForm" (ngSubmit)="onUpdateProfile(f1.value)" class="profile-form">
 	    		<label for="first_name">First Name:</label>
 		    	<br>
-		    	<input type="text" name="first_name" ngControl="first_name" value="{{user.first_name}}"/>
+		    	<input type="text" name="first_name" [ngModel]="first_name" value="{{user.first_name}}"/>
 		    	<br><br>
 		    	<label for="last_name">Last Name:</label>
 		    	<br>
-		    	<input type="text" name="last_name" ngControl="last_name" value="{{user.last_name}}"/>
+		    	<input type="text" name="last_name" [ngModel]="last_name" value="{{user.last_name}}"/>
 		    	<br><br>
 		    	<label for="email">E-mail:</label>
 		    	<br>
-		    	<input type="text" name="email" ngControl="email" value="{{user.email}}"/>
+		    	<input type="text" name="email" [ngModel]="email" value="{{user.email}}"/>
 		    	<br><br>
 		    	<input type="hidden" name="_method" value="patch"/>
 	    		<input class="profile-submit" type="submit" id="profile-submit" value="Update Profile"/>
@@ -35,19 +34,19 @@ import {HTTP_PROVIDERS} from "angular2/http";
 	    </div>
 
 	    <div class="container profile-credentials" id="profile-credentials">
-	    	<form #f2="ngForm" (ngSubmit)="onChangePassword(f2.form)" class="profile-form">
+	    	<form #f2="ngForm" (ngSubmit)="onChangePassword(f2.value)" class="profile-form">
 	    		<label for="password">Old Password:</label>
 	    		<br>
-	    		<input type="password" name="old_password" ngControl="old_password" placeholder="Old Password"/>
+	    		<input type="password" name="old_password" [ngModel]="old_password" placeholder="Old Password"/>
 		    	<br><br>
 		    	<label for="password">New Password:</label>
 		    	<br>
-		    	<input type="password" name="new_password" ngControl="new_password" placeholder="New Password"/>
+		    	<input type="password" name="new_password" [ngModel]="new_password" placeholder="New Password"/>
 		    	<br><br>
 		    	<label for="new_password">Confirm New Password:</label>
 		    	<br>
 		    	<input type="hidden" name="_method" value="patch"/>
-		    	<input type="password" name="confirm_new_password" ngControl="confirm_new_password" placeholder="Confirm New Password"/>
+		    	<input type="password" name="confirm_new_password" [ngModel]="confirm_new_password" placeholder="Confirm New Password"/>
 		    	<br><br>
 		    	<input class="profile-submit" type="submit" id="password-submit" value="Change Password"/>
 		    </form>
@@ -56,7 +55,7 @@ import {HTTP_PROVIDERS} from "angular2/http";
     host: {'class' : 'ng-animate profileContainer'},
     styleUrls: ['app/stylesheets/profile.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [ProfileService, HTTP_PROVIDERS]
+    providers: [ProfileService]
 })
 export class ProfileComponent {
     constructor(private _profileService: ProfileService, private _router: Router) { }
@@ -69,7 +68,7 @@ export class ProfileComponent {
         this.getCurrentUser();
     }
     
-    protected getCurrentUser() {
+    private getCurrentUser(): void {
         let self = this;
 
         this._profileService.getCurrentUser().subscribe(result => {
@@ -77,21 +76,21 @@ export class ProfileComponent {
                 this.user = result.user;
             } else {
                 console.log(result.message);
-                self._router.navigate(['Login']);
+                self._router.navigateByUrl('/login');
             }
         });
     }
 
-    onUpdateProfile(form) {
+    private onUpdateProfile(form: any): void {
         let self = this;
 
         this._profileService.updateProfile(form).subscribe(result => {
             if (result.message === 'ok') {
-                this._router.navigate(['Dashboard']);
+                this._router.navigateByUrl('/dashboard');
             } else {
                 console.log(result.message);
                 if (result.message === 'login') {
-                    this._router.navigate(['Login']);
+                    this._router.navigateByUrl('/login');
                 } else {
                     this.profileMessage = result.message;
                 }
@@ -99,7 +98,7 @@ export class ProfileComponent {
         });
     }
 
-    onChangePassword(form) {
+    private onChangePassword(form: any): void {
         let self = this;
 
         this._profileService.changePassword(form).subscribe(result => {
@@ -114,7 +113,6 @@ export class ProfileComponent {
                 }
             }
         });
-
     }
 
 }

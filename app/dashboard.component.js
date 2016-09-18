@@ -12,10 +12,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// import {ProjectSelectorComponent} from './project_selector.component';
+var router_1 = require('@angular/router');
+var project_selector_component_1 = require('./project_selector.component');
 // import {WireframesComponent} from './wireframes.component';
 // import {UserStoriesComponent} from './user_stories.component';
-// import {BannerComponent} from './banner.component';
+var banner_component_1 = require('./banner.component');
 // import {TaskListComponent} from './task_list.component';
 var DashboardComponent = (function () {
     function DashboardComponent() {
@@ -23,7 +24,17 @@ var DashboardComponent = (function () {
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'dashboard',
-            template: "\n        <h1>This is the dashboard component</h1>\n        <!--<div class=\"dashboard\"> -->\n            <!--<banner></banner>-->\n            <!--<div class=\"container left-panel\" id=\"left-panel\"> -->\n                <!--<div class=\"container upper-left-section\" id=\"upper-left-section\">-->\n                    <!--<project-selector [projects]=\"projects\"></project-selector>\t-->\n                    <!--<wireframes></wireframes>-->\n                <!--</div>-->\n                <!--<div class=\"container lower-left-section\" id=\"lower-left-section\">-->\n                    <!--<user-stories></user-stories>-->\n                <!--</div>-->\n            <!--</div>    -->\n            <!--<div class=\"container right-panel\" id=\"right-panel\">-->\n                <!--<task-list></task-list>-->\n            <!--</div> -->\n\t    <!--</div>-->\n        ",
+            template: "\n        <div class=\"dashboard\"> \n            <banner></banner>\n            <div class=\"container left-panel\" id=\"left-panel\"> \n                <div class=\"container upper-left-section\" id=\"upper-left-section\">\n                    <project-selector></project-selector>\t\n                    <!--<wireframes></wireframes>-->\n                </div>\n                <div class=\"container lower-left-section\" id=\"lower-left-section\">\n                    <!--<user-stories></user-stories>-->\n                </div>\n            </div>    \n            <div class=\"container right-panel\" id=\"right-panel\">\n                <!--<task-list></task-list>-->\n            </div> \n\t    </div>\n        ",
+            host: { 'class': 'ng-animate dashboardContainer' },
+            styleUrls: ['app/stylesheets/dashboard.css'],
+            directives: [
+                router_1.ROUTER_DIRECTIVES,
+                project_selector_component_1.ProjectSelectorComponent,
+                //     WireframesComponent,
+                //     UserStoriesComponent,
+                //     TaskListComponent,
+                banner_component_1.BannerComponent
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardComponent);

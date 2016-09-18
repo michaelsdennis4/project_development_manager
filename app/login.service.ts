@@ -11,7 +11,7 @@ export class LoginService {
 
     constructor(private _http: Http) {}
 
-    authenticate(form: any): Observable<any> {
+    public authenticate(form: any): Observable<any> {
 
         let credentials = JSON.stringify({
             email: form.email ? form.email : "",
@@ -26,12 +26,12 @@ export class LoginService {
 
     }
 
-    isLoggedIn(): Observable<any> {
+    public isLoggedIn(): Observable<any> {
         return this._http.get('/logged')
             .map(data => data.json());
     }
     
-    logout(): Observable<any> {
+    public logout(): Observable<any> {
         return this._http.get('/logout')
             .map(data => data.json());
     }

@@ -5,41 +5,40 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 
-// import {ProjectSelectorComponent} from './project_selector.component';
+import {ProjectSelectorComponent} from './project_selector.component';
 // import {WireframesComponent} from './wireframes.component';
 // import {UserStoriesComponent} from './user_stories.component';
-// import {BannerComponent} from './banner.component';
+import {BannerComponent} from './banner.component';
 // import {TaskListComponent} from './task_list.component';
 
 @Component({
     selector: 'dashboard',
     template: `
-        <h1>This is the dashboard component</h1>
-        <!--<div class="dashboard"> -->
-            <!--<banner></banner>-->
-            <!--<div class="container left-panel" id="left-panel"> -->
-                <!--<div class="container upper-left-section" id="upper-left-section">-->
-                    <!--<project-selector [projects]="projects"></project-selector>	-->
+        <div class="dashboard"> 
+            <banner></banner>
+            <div class="container left-panel" id="left-panel"> 
+                <div class="container upper-left-section" id="upper-left-section">
+                    <project-selector></project-selector>	
                     <!--<wireframes></wireframes>-->
-                <!--</div>-->
-                <!--<div class="container lower-left-section" id="lower-left-section">-->
+                </div>
+                <div class="container lower-left-section" id="lower-left-section">
                     <!--<user-stories></user-stories>-->
-                <!--</div>-->
-            <!--</div>    -->
-            <!--<div class="container right-panel" id="right-panel">-->
+                </div>
+            </div>    
+            <div class="container right-panel" id="right-panel">
                 <!--<task-list></task-list>-->
-            <!--</div> -->
-	    <!--</div>-->
+            </div> 
+	    </div>
         `,
-    // host: {'class' : 'ng-animate dashboardContainer'},
-    // styleUrls: ['app/stylesheets/dashboard.css'],
-    // directives: [
-    //     // ROUTER_DIRECTIVES,
-    //     ProjectSelectorComponent,
+    host: {'class' : 'ng-animate dashboardContainer'},
+    styleUrls: ['app/stylesheets/dashboard.css'],
+    directives: [
+        ROUTER_DIRECTIVES,
+        ProjectSelectorComponent,
     //     WireframesComponent,
     //     UserStoriesComponent,
     //     TaskListComponent,
-    //     BannerComponent
-    // ]
+        BannerComponent
+    ]
 })
 export class DashboardComponent { }

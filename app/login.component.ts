@@ -15,7 +15,7 @@ import {LoginService} from "./login.service";
             </div>
             <div class="container profile-credentials" id="credentials">
                 Login
-                <form *ngIf="active" (ngSubmit)="onSubmit(f.value)" #f="ngForm" class="profile-form">
+                <form (ngSubmit)="onSubmit(f.value)" #f="ngForm" class="profile-form">
                     <label for="email">E-mail:</label>
                     <br>
                     <input type="text" class="form-control" name="email" [ngModel]="email" placeholder="E-mail" />
@@ -29,7 +29,7 @@ import {LoginService} from "./login.service";
                 <span class="submit-message" id="login-message">{{message}}</span>
             </div>
             <div class="container signup-link" id="signup">
-                <a routerLink="/signup" routerLinkActive="active">Sign Up</a>
+                <a [routerLink]="['/signup']">Sign Up</a>
             </div>
 	    </div>`,
     host: {'class' : 'ng-animate loginContainer'},
@@ -39,12 +39,11 @@ import {LoginService} from "./login.service";
 })
 export class LoginComponent {
 
-    private active = true;
     public message = "";
 
     constructor(private _loginService: LoginService, private _router: Router) { }
 
-    onSubmit(form: any): void    {
+    private onSubmit(form: any): void    {
         console.log('you submitted value:', form);
         let self = this;
         this._loginService.authenticate(form).subscribe(result => {

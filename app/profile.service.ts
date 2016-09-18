@@ -6,12 +6,12 @@ import {Observable}     from 'rxjs/Observable';
 export class ProfileService {
     constructor(private _http: Http) {}
 
-    getCurrentUser(): Observable<any> {
+    public getCurrentUser(): Observable<any> {
         return this._http.get('/users')
             .map(data => data.json());
     }
 
-    signUp(form: any): Observable<any> {
+    public signUp(form: any): Observable<any> {
 
         let credentials = JSON.stringify({
             email: form.email ? form.email : "",
@@ -29,7 +29,7 @@ export class ProfileService {
 
     }
     
-    updateProfile(form: any): Observable<any> {
+    public updateProfile(form: any): Observable<any> {
 
         let credentials = {
             email: form.email,
@@ -45,7 +45,7 @@ export class ProfileService {
 
     }
     
-    changePassword(form: any): Observable<any> {
+    public changePassword(form: any): Observable<any> {
         
         let credentials = {
             old_password: form.old_password ? form.old_password : "",

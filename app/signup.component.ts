@@ -11,7 +11,7 @@ import {ProfileService} from "./profile.service";
     template: `
         <div class="signup">
             <div class="top-link">
-                <a routerLink="/login" routerLinkActive="active">Login</a>
+                <a [routerLink]="['/login']">Login</a>
             </div>
             <div class="container profile-caption" id="signup-caption">
                 Sign Up for a New Account
@@ -51,9 +51,9 @@ import {ProfileService} from "./profile.service";
 export class SignUpComponent {
     constructor(private _profileService: ProfileService, private _router: Router) { }
     
-    message = "";
+    public message = "";
     
-    onSubmit(form) {
+    private onSubmit(form: any): void {
         let self = this;
         this._profileService.signUp(form).subscribe(result => {
             if (result.message === 'ok') {

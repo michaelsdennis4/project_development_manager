@@ -2,11 +2,11 @@
  * Created by Michael on 6/15/16.
  */
 
-import {Component, OnInit, ElementRef} from 'angular2/core';
+import {Component, OnInit, ElementRef} from '@angular/core';
 import {ProjectService} from "./project.service";
-import {HTTP_PROVIDERS} from "angular2/http";
 import {ProjectModalComponent} from './project_modal.component';
 import {IModalShown} from "./interfaces";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'project-selector',
@@ -17,7 +17,7 @@ import {IModalShown} from "./interfaces";
 			<form method="">
 				<label for="project-select">Select A Project:</label>
 				<br>
-				<select #projectSelect [ngModel]="projectSelected">
+				<select [(ngModel)]="projectSelected" name="project" #project="ngModel">
 				    <option [value]=""></option>
 					<option [value]="project" *ngFor="let project of projects">{{project.title}}</option>
 				</select>
@@ -34,46 +34,49 @@ import {IModalShown} from "./interfaces";
         <project-modal [show-modal]="isProjectModalShown" (added)="projectAdded($event)"></project-modal>`,
     styleUrls: ['app/stylesheets/dashboard.css'],
     directives: [ProjectModalComponent],
-    providers: [ProjectService, HTTP_PROVIDERS]
+    providers: [ProjectService]
 })
 export class ProjectSelectorComponent implements OnInit {
 
     public isProjectModalShown: IModalShown = {show: false};
     public projectSelected: string;
-    private projects: any[];
+    public projects: any[];
 
-    constructor(private _projectsService: ProjectService) {}
+    constructor(private _projectService: ProjectService, private _router: Router) {}
 
-    ngOnInit() {
+
+    ngOnInit(): void {
         this.projects = [];
         this.getProjects();
         this.isProjectModalShown.show = false;
         this.projectSelected = '';
     }
 
-    onNewProject($event) {
+    private onNewProject($event): void {
         $event.preventDefault();
         this.isProjectModalShown.show = true;
     }
 
-    onNewVersion($event) {
-        $event.preventDefault();
-    }
-
-    projectAdded($event) {
+    private projectAdded($event): void {
         this.getProjects();
         this.projectSelected = this.projects[this.projects.length-1];
     }
 
-    getProjects() {
-        this._projectsService.getProjects().subscribe(results => {
+    private getProjects(): void {
+        this._projectService.getProjects().subscribe(results => {
             if (results.message === 'ok') {
                 this.projects = results.projects;
                 console.log(this.projects);
+            } else if (results.message == 'login') {
+                this._router.navigateByUrl('/login');
             } else {
                 console.log(results.message);
             }
         });
+    }
+
+    private onNewVersion($event) {
+        $event.preventDefault();
     }
 
 }

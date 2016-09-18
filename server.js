@@ -42,7 +42,7 @@ MongoClient.connect(mongoUri, function(error, db) {
     app.post('/authenticate', function(req, res) {
         db.collection('users').find({email: req.body.email}).toArray(function(error, results) {
             if ((error) || (results.length !== 1)) {
-                res.json({message: 'Incorrect username/password 1 '+req.body.email});
+                res.json({message: 'Incorrect username/password'});
             }
             else {
                 var user = results[0];
@@ -54,7 +54,7 @@ MongoClient.connect(mongoUri, function(error, db) {
                     session.username = user.first_name +' '+user.last_name;
                     res.json({message: 'ok'});
                 } else {
-                    res.json({message: 'Incorrect username/password 2'});
+                    res.json({message: 'Incorrect username/password'});
                 }
             }
         });

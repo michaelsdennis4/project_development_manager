@@ -2,17 +2,16 @@
  * Created by Michael on 6/6/16.
  */
 
-import {Component, OnInit} from 'angular2/core';
-import {Router, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component} from '@angular/core';
+import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 import {LoginService} from "./login.service";
-import {HTTP_PROVIDERS} from 'angular2/http';
 
 @Component({
     selector: 'banner',
     template: `
         <div class="container banner" id="banner">
             <div class="container upper-banner" id="upper-banner">
-		    	<a [routerLink]="['Profile']">Edit Profile</a>
+		    	<a [routerLink]="['/profile']">Edit Profile</a>
 		    	<a href="" (click)="onLogout($event)">Logout</a>
 		    </div>
 		    <div class="container lower-banner" id="lower-banner">
@@ -21,7 +20,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 	    </div>`,
     styleUrls: ['app/stylesheets/dashboard.css'],
     directives: [ROUTER_DIRECTIVES],
-    providers: [LoginService, HTTP_PROVIDERS]
+    providers: [LoginService]
 })
 export class BannerComponent {
 
@@ -29,13 +28,13 @@ export class BannerComponent {
                 private _router: Router
     ) { }
 
-    onLogout($event) {
+    public onLogout($event): void {
         $event.preventDefault();
         let self = this;
         this._loginService.logout().subscribe(result => {
             if (result.message === 'ok') {
                 console.log('logout successful');
-                this._router.navigate(['Login']);
+                this._router.navigateByUrl('/login');
             } else {
                 console.log(result.message);
             }

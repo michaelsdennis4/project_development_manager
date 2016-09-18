@@ -11,13 +11,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var project_service_1 = require("./project.service");
-var http_1 = require("angular2/http");
 var project_modal_component_1 = require('./project_modal.component');
+var router_1 = require("@angular/router");
 var ProjectSelectorComponent = (function () {
-    function ProjectSelectorComponent(_projectsService) {
-        this._projectsService = _projectsService;
+    function ProjectSelectorComponent(_projectService, _router) {
+        this._projectService = _projectService;
+        this._router = _router;
         this.isProjectModalShown = { show: false };
     }
     ProjectSelectorComponent.prototype.ngOnInit = function () {
@@ -30,37 +31,39 @@ var ProjectSelectorComponent = (function () {
         $event.preventDefault();
         this.isProjectModalShown.show = true;
     };
-    ProjectSelectorComponent.prototype.onNewVersion = function ($event) {
-        $event.preventDefault();
-    };
     ProjectSelectorComponent.prototype.projectAdded = function ($event) {
         this.getProjects();
         this.projectSelected = this.projects[this.projects.length - 1];
     };
     ProjectSelectorComponent.prototype.getProjects = function () {
         var _this = this;
-        this._projectsService.getProjects().subscribe(function (results) {
+        this._projectService.getProjects().subscribe(function (results) {
             if (results.message === 'ok') {
                 _this.projects = results.projects;
                 console.log(_this.projects);
+            }
+            else if (results.message == 'login') {
+                _this._router.navigateByUrl('/login');
             }
             else {
                 console.log(results.message);
             }
         });
     };
+    ProjectSelectorComponent.prototype.onNewVersion = function ($event) {
+        $event.preventDefault();
+    };
     ProjectSelectorComponent = __decorate([
         core_1.Component({
             selector: 'project-selector',
-            template: "\n        <link rel=\"stylesheet\" href=\"app/stylesheets/dashboard.css\">\n        <div class=\"container project-selection\" id=\"project-selection\">\n            <button (click)=\"onNewProject($event)\">New Project</button>\n\t\t\t<form method=\"\">\n\t\t\t\t<label for=\"project-select\">Select A Project:</label>\n\t\t\t\t<br>\n\t\t\t\t<select #projectSelect [ngModel]=\"projectSelected\">\n\t\t\t\t    <option [value]=\"\"></option>\n\t\t\t\t\t<option [value]=\"project\" *ngFor=\"let project of projects\">{{project.title}}</option>\n\t\t\t\t</select>\n\t\t\t</form>\n\t\t\t<button (click)=\"onNewVersion($event)\">New Version</button>\n\t\t\t<form method=\"\">\n\t\t\t\t<label for=\"version-select\">Version/Branch:</label>\n\t\t\t\t<br>\n\t\t\t\t<select #versionSelect>\n\t\t\t\t\t<option>Sample Version</option>\n\t\t\t\t</select>\n\t\t\t</form>\n\t\t</div>\n        <project-modal [show-modal]=\"isProjectModalShown\" (added)=\"projectAdded($event)\"></project-modal>",
+            template: "\n        <link rel=\"stylesheet\" href=\"app/stylesheets/dashboard.css\">\n        <div class=\"container project-selection\" id=\"project-selection\">\n            <button (click)=\"onNewProject($event)\">New Project</button>\n\t\t\t<form method=\"\">\n\t\t\t\t<label for=\"project-select\">Select A Project:</label>\n\t\t\t\t<br>\n\t\t\t\t<select [(ngModel)]=\"projectSelected\" name=\"project\" #project=\"ngModel\">\n\t\t\t\t    <option [value]=\"\"></option>\n\t\t\t\t\t<option [value]=\"project\" *ngFor=\"let project of projects\">{{project.title}}</option>\n\t\t\t\t</select>\n\t\t\t</form>\n\t\t\t<button (click)=\"onNewVersion($event)\">New Version</button>\n\t\t\t<form method=\"\">\n\t\t\t\t<label for=\"version-select\">Version/Branch:</label>\n\t\t\t\t<br>\n\t\t\t\t<select #versionSelect>\n\t\t\t\t\t<option>Sample Version</option>\n\t\t\t\t</select>\n\t\t\t</form>\n\t\t</div>\n        <project-modal [show-modal]=\"isProjectModalShown\" (added)=\"projectAdded($event)\"></project-modal>",
             styleUrls: ['app/stylesheets/dashboard.css'],
             directives: [project_modal_component_1.ProjectModalComponent],
-            providers: [project_service_1.ProjectService, http_1.HTTP_PROVIDERS]
+            providers: [project_service_1.ProjectService]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof project_service_1.ProjectService !== 'undefined' && project_service_1.ProjectService) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [project_service_1.ProjectService, router_1.Router])
     ], ProjectSelectorComponent);
     return ProjectSelectorComponent;
-    var _a;
 }());
 exports.ProjectSelectorComponent = ProjectSelectorComponent;
 //# sourceMappingURL=project_selector.component.js.map
