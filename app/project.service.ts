@@ -5,6 +5,7 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
+import {IProject} from "./interfaces";
 
 @Injectable()
 export class ProjectService {
@@ -30,10 +31,23 @@ export class ProjectService {
 
     public getProjects(): Observable<any> {
 
-        // let headers = new Headers({ 'Content-Type': 'application/json' });
-        // let options = new RequestOptions({ headers: headers });
-
         return this._http.get('/projects')
+            .map(data => data.json());
+
+    }
+
+    public addNewBranch(form: any, project: IProject): Observable<any> {
+
+        let data = JSON.stringify({
+            name: form.name ? form.name : "",
+            description: form.description ? form.description : "",
+            projectId: project.id
+        });
+
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this._http.post('/branches', data, options)
             .map(data => data.json());
 
     }

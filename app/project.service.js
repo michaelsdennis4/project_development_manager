@@ -30,9 +30,18 @@ var ProjectService = (function () {
             .map(function (data) { return data.json(); });
     };
     ProjectService.prototype.getProjects = function () {
-        // let headers = new Headers({ 'Content-Type': 'application/json' });
-        // let options = new RequestOptions({ headers: headers });
         return this._http.get('/projects')
+            .map(function (data) { return data.json(); });
+    };
+    ProjectService.prototype.addNewBranch = function (form, project) {
+        var data = JSON.stringify({
+            name: form.name ? form.name : "",
+            description: form.description ? form.description : "",
+            projectId: project.id
+        });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this._http.post('/branches', data, options)
             .map(function (data) { return data.json(); });
     };
     ProjectService = __decorate([

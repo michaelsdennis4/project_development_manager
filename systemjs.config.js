@@ -42,7 +42,10 @@
     ngPackageNames.forEach(setPackageConfig);
     var config = {
         map: map,
-        packages: packages
+        packages: packages,
+        paths: {
+            underscore: './node_modules/underscore/underscore.js'
+        }
     };
     System.config(config);
 })(this);

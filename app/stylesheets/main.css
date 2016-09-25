@@ -1,9 +1,8 @@
 body {
+  font: Helvetica, Arial, sans-serif;
   text-align: center;
-  font-family: sans-serif;
 }
 .container {
   float: left;
-  border: solid #f00 1px;
   color: #000;
 }

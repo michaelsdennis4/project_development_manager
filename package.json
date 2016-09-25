@@ -38,6 +38,7 @@
     "rxjs": "5.0.0-beta.6",
     "systemjs": "0.19.27",
     "typescript": "^1.9.0-dev.20160627-1.0",
+    "underscore": "^1.8.3",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {

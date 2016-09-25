@@ -11,20 +11,24 @@ import {LoginService} from "./login.service";
     template: `
         <div class="login">
             <div class="container title" id="title">
-                Product Development Manager
+                <h1>Product Development Manager</h1>
             </div>
             <div class="container profile-credentials" id="credentials">
-                Login
+                <h3>Login</h3>
                 <form (ngSubmit)="onSubmit(f.value)" #f="ngForm" class="profile-form">
-                    <label for="email">E-mail:</label>
-                    <br>
-                    <input type="text" class="form-control" name="email" [ngModel]="email" placeholder="E-mail" />
-                    <br><br>
-                    <label for="password">Password:</label>
-                    <br>
-                    <input type="password" class="form-control" name="password" [ngModel]="password" placeholder="Password" required/>
-                    <br><br>
-                    <input class="profile-submit form-control" type="submit" id="login-submit" value="Log In"/>
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <br>
+                        <input type="text" class="form-control" name="email" [ngModel]="email" placeholder="E-mail" />
+                        <br><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <br>
+                        <input type="password" class="form-control" name="password" [ngModel]="password" placeholder="Password" required/>
+                        <br><br>
+                    </div>
+                    <input class="profile-submit btn btn-default" type="submit" id="login-submit" value="Log In"/>
                 </form>
                 <span class="submit-message" id="login-message">{{message}}</span>
             </div>

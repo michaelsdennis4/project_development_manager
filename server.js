@@ -272,6 +272,41 @@ MongoClient.connect(mongoUri, function(error, db) {
         }
     });
 
+    app.patch('/projects', function(req, res) {
+
+    });
+
+    app.post('/branches', function(req, res) {
+        if ((req.session.user_id) && (req.session.user_id != null)) {
+            if (req.body.name.length === 0) {
+                res.json({message: 'Branch must have a name.'});
+            } else {
+                var newBranch = {
+                    _id: ObjectId(),
+                    name: req.body.name,
+                    description: req.body.description
+                };
+                console.log('the user id is '+req.session.user_id);
+                console.log('the project id is '+req.body.projectId);
+                db.collection('users').updateOne({_id: ObjectId(req.session.user_id),
+                        'projects._id': ObjectId(req.body.projectId)},
+                    {$push: {'projects.$.branches': newBranch}}, function(error, results) {
+                        if (!error) {
+                            res.json({message: 'ok'});
+                        } else {
+                            res.json({message: 'Error creating branch.'});
+                        }
+                    });
+            }
+        } else {
+            res.json({message: 'login'});
+        }
+    });
+
+    app.patch('/branches', function(req, res) {
+
+    });
+
     app.get('*', function(req, res) {
         res.sendFile("index.html", { root: '.' });
     });
